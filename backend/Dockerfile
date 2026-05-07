@@ -15,10 +15,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app/ ./app/
 
 # Create data directory for SQLite
-RUN mkdir -p /app/data /app/logs
+RUN mkdir -p /app/data /app/logs && chmod 777 /app/data /app/logs
 
 # Health check
-HEALTHCHECK --interval=10s --timeout=5s --retries=5 --start-period=10s \
+HEALTHCHECK --interval=10s --timeout=5s --retries=5 --start-period=15s \
     CMD curl -f http://localhost:8000/api/health || exit 1
 
 EXPOSE 8000
